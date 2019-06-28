@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Cat app',
       theme: ThemeData(
           // This is the theme of your application.
           //
@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
-          primarySwatch: Colors.green,
+          primarySwatch: Colors.blue,
           brightness: Brightness.light),
-      home: MyHomePage(title: 'Home Page'),
+      home: MyHomePage(title: 'Meow'),
     );
   }
 }
@@ -82,13 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               // Add one stop for each color. Stops should increase from 0 to 1
-              stops: [0.2, 0.6, 0.8, 0.9],
+              stops: [0.2, 0.4, 0.6, 0.8, 0.9],
               colors: [
                 // Colors are easy thanks to Flutter's Colors class.
-                Colors.orange[50],
-                Colors.orange[100],
-                Colors.orange[200],
-                Colors.orange[300],
+                Colors.cyan[50],
+                Colors.cyan[100],
+                Colors.cyan[200],
+                Colors.cyan[300],
+                Colors.cyan[400],
               ],
             ),
           ),
