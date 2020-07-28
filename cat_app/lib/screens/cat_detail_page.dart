@@ -14,10 +14,11 @@ class CatDetailPage extends StatefulWidget {
 class _CatDetailPageState extends State<CatDetailPage> {
   // Arbitrary size choice for styles
   final double avatarSize = 150.0;
+  // This is the starting value of the slider.
+  double _sliderValue = 0.0;
 
-  Widget get catImage {
-    // Containers define the size of its children.
-    return CircleImage(widget.cat.imageUrl, this.avatarSize);
+  void updateRating() {
+    setState(() => widget.cat.rating = _sliderValue.toInt());
   }
 
   // The rating section that says ★ 10/10.
@@ -61,7 +62,7 @@ class _CatDetailPageState extends State<CatDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          catImage,
+          CircleImage(widget.cat.imageUrl, this.avatarSize),
           Text(
             '${widget.cat.name} 🐈',
             style: TextStyle(fontSize: 36.0),
@@ -80,6 +81,79 @@ class _CatDetailPageState extends State<CatDetailPage> {
     );
   }
 
+  Widget get addYourRating {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.symmetric(
+            vertical: 16.0,
+            horizontal: 16.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              // In a row, column, listview, etc., a Flexible widget is a wrapper
+              // that works much like CSS's flex-grow property.
+              //
+              // Any room left over in the main axis after
+              // the widgets are given their width
+              // will be distributed to all the flexible widgets
+              // at a ratio based on the flex property you pass in.
+              // Because this is the only Flexible widget,
+              // it will take up all the extra space.
+              //
+              // In other words, it will expand as much as it can until
+              // the all the space is taken up.
+              Flexible(
+                flex: 1,
+                // A slider, like many form elements, needs to know its
+                // own value and how to update that value.
+                //
+                // The slider will call onChanged whenever the value
+                // changes. But it will only repaint when its value property
+                // changes in the state using setState.
+                //
+                // The workflow is:
+                // 1. User drags the slider.
+                // 2. onChanged is called.
+                // 3. The callback in onChanged sets the sliderValue state.
+                // 4. Flutter repaints everything that relies on sliderValue,
+                // in this case, just the slider at its new value.
+                child: Slider(
+                  activeColor: Colors.indigoAccent,
+                  min: 0.0,
+                  max: 10.0,
+                  onChanged: (newRating) {
+                    setState(() => _sliderValue = newRating);
+                  },
+                  value: _sliderValue,
+                ),
+              ),
+
+              // This is the part that displays the value of the slider.
+              Container(
+                width: 50.0,
+                alignment: Alignment.center,
+                child: Text('${_sliderValue.toInt()}',
+                    style: Theme.of(context).textTheme.headline4),
+              ),
+            ],
+          ),
+        ),
+        submitRatingButton,
+      ],
+    );
+  }
+
+  // A simple Raised Button that as of now doesn't do anything yet.
+  Widget get submitRatingButton {
+    return RaisedButton(
+      onPressed: () => updateRating(),
+      child: Text('Vote'),
+      color: Colors.pinkAccent,
+    );
+  }
+
   //Finally, the build method:
   //
   // Aside:
@@ -94,7 +168,12 @@ class _CatDetailPageState extends State<CatDetailPage> {
         backgroundColor: Colors.black87,
         title: Text('Meet ${widget.cat.name}'),
       ),
-      body: catProfile,
+      body: ListView(
+        children: <Widget>[
+          catProfile,
+          addYourRating
+        ],
+      ),
     );
   }
 }

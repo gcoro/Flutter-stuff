@@ -13,14 +13,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Cat> initialCats = []
-    ..add(Cat('Ruby', 'Portland, OR, USA',
-        'Ruby is a very good girl. Yes: Fetch, loungin\'. No: Dogs who get on furniture.'))
-    ..add(Cat('Rex', 'Seattle, WA, USA', 'Best in Show 1999'))
-    ..add(Cat('Rod', 'Prague, CZ',
-        'Star good boy on international snooze team.'))
-    ..add(Cat('Herbert', 'Dallas, TX, USA', 'A Very Good Boy'))
-    ..add(Cat('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.'));
+  List<Cat> cats = [
+    Cat('Ruby', 'Portland, OR, USA',
+        'Ruby is a very good girl. Yes: Fetch. No: Dogs who get on furniture.'),
+    Cat('Rex', 'Seattle, WA, USA', 'Best in Show 1999'),
+    Cat('Rod', 'Prague, CZ',
+        'Star good boy on international snooze team.'),
+    Cat('Herbert', 'Dallas, TX, USA', 'A Very Good Boy'),
+  Cat('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.')
+  ];
 
     // Any time you're pushing a new route and expect that route
   // to return something back to you,
@@ -42,9 +43,7 @@ class _HomePageState extends State<HomePage> {
     // A null check, to make sure that the user didn't abandon the form.
     if (newCat != null) {
       // Add a newDog to our mock dog array.
-      setState(() {
-        initialCats.add(newCat);
-      });
+      setState(() =>   cats.add(newCat));
     }
   }
 
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             ]
           )
         ),
-        child: CatList(initialCats),
+        child: CatList(cats),
       ),
     );
   }

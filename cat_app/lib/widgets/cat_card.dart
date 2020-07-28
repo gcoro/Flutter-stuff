@@ -63,33 +63,6 @@ class _CatCardState extends State<CatCard> {
     );
   }
 
-  Widget get catImage {
-    return Container(
-      // You can explicitly set heights and widths on Containers.
-      // Otherwise they take up as much space as their children.
-      width: 80.0,
-      height: 80.0,
-      // Decoration is a property that lets you style the container.
-      // It expects a BoxDecoration.
-      decoration: BoxDecoration(
-        // BoxDecorations have many possible properties.
-        // Using BoxShape with a background image is the
-        // easiest way to make a circle cropped avatar style image.
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          // Just like CSS's `imagesize` property.
-          fit: BoxFit.cover,
-          // A NetworkImage widget is a widget that
-          // takes a URL to an image.
-          // ImageProviders (such as NetworkImage) are ideal
-          // when your image needs to be loaded or can change.
-          // Use the null check to avoid an error.
-          image: NetworkImage(renderUrl ?? 'https://via.placeholder.com/150'),
-        ),
-      ),
-    );
-  }
-
   Widget get catCard {
     // A new container
     // The height and width are arbitrary numbers for styling.

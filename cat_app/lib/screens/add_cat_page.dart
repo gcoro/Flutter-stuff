@@ -119,7 +119,7 @@ class _AddCatPageState extends State<AddCatPage> {
                         // If onPressed is null, the button is disabled
                         // this is my goto temporary callback.
                         onPressed: () => submitForm(context),
-                        color: Colors.indigoAccent,
+                        color: Colors.pinkAccent,
                         child: Text('Submit'),
                       );
                     },
