@@ -63,7 +63,19 @@ class _CatCardState extends State<CatCard> {
     );
   }
 
-  Widget get catCard {
+  Widget get catImage {
+    // Wrap the dogAvatar widget in a Hero widget.
+    return Hero(
+      // Give your hero a tag.
+      //
+      // Flutter looks for two widgets on two different pages,
+      // and if they have the same tag it animates between them.
+      tag: widget.cat,
+      child: CircleImage(renderUrl, 100)
+    );
+    }
+
+      Widget get catCard {
     // A new container
     // The height and width are arbitrary numbers for styling.
     return Container(
@@ -84,7 +96,7 @@ class _CatCardState extends State<CatCard> {
               // widgets out from top to bottom.
               child: Row(
                 children: <Widget>[
-                  CircleImage(renderUrl, 100),
+                  catImage,
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Column(

@@ -39,6 +39,18 @@ class _CatDetailPageState extends State<CatDetailPage> {
     );
   }
 
+  Widget get catImage {
+    // Wrap the dogAvatar widget in a Hero widget.
+    return Hero(
+      // Give your hero a tag.
+      //
+      // Flutter looks for two widgets on two different pages,
+      // and if they have the same tag it animates between them.
+        tag: widget.cat,
+        child:CircleImage(widget.cat.imageUrl, this.avatarSize)
+    );
+  }
+
   // The widget that displays the image, rating and info.
   Widget get catProfile {
     return Container(
@@ -62,7 +74,7 @@ class _CatDetailPageState extends State<CatDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          CircleImage(widget.cat.imageUrl, this.avatarSize),
+          catImage,
           Text(
             '${widget.cat.name} 🐈',
             style: TextStyle(fontSize: 36.0),
