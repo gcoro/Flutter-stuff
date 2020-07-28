@@ -4,7 +4,7 @@ import 'package:cat_app/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
 
 class CatCard extends StatefulWidget {
-  final Cat cat;
+  Cat cat;
 
   CatCard(this.cat);
 
@@ -46,14 +46,15 @@ class _CatCardState extends State<CatCard> {
 
 
  // This is the builder method that creates a new page.
-  showDetailPage() {
+  showDetailPage() async {
     // Navigator.of(context) accesses the current app's navigator.
     // Navigators can 'push' new routes onto the stack,
     // as well as pop routes off the stack.
     //
     // This is the easiest way to build a new page on the fly
     // and pass that page some state from the current page.
-    Navigator.of(context).push(
+
+    Cat updatedCat = await Navigator.of(context).push(
       MaterialPageRoute(
         // builder methods always take context!
         builder: (context) {
@@ -61,6 +62,10 @@ class _CatCardState extends State<CatCard> {
         },
       ),
     );
+
+    if (updatedCat != null) {
+         setState(() => widget.cat = updatedCat);
+    }
   }
 
   Widget get catImage {

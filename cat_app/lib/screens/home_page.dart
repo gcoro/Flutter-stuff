@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     Cat('Rod', 'Prague, CZ',
         'Star good boy on international snooze team.'),
     Cat('Herbert', 'Dallas, TX, USA', 'A Very Good Boy'),
-  Cat('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.')
+    Cat('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.')
   ];
 
     // Any time you're pushing a new route and expect that route

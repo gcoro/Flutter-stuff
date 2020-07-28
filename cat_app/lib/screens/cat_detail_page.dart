@@ -26,6 +26,7 @@ class _CatDetailPageState extends State<CatDetailPage> {
 
   void updateRating() {
     setState(() => widget.cat.rating = _sliderValue.toInt());
+    Navigator.of(context).pop(widget.cat);
   }
 
   // The rating section that says ★ 10/10.

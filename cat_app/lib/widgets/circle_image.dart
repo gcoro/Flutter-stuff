@@ -34,7 +34,7 @@ class CircleImage extends StatelessWidget {
         shape: BoxShape.circle,
         image: new DecorationImage(
           fit: BoxFit.cover,
-          image: new NetworkImage(renderUrl),
+          image: new NetworkImage(renderUrl?? ""),
         ),
       ),
     );
