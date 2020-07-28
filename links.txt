@@ -1,0 +1,14 @@
+sito per imparare (molto completo)
+https://www.flutterbyexample.com/ 
+
+docs dei widget di flutter
+https://flutter.dev/docs/reference/widgets
+
+confronto tra xamarin e flutter
+https://blog.codemagic.io/flutter-vs-xamarin-a-developer-s-perspective/ 
+
+gallery di esempi
+https://gallery.flutter.dev/
+
+video sull'architettura di app flutter
+https://www.youtube.com/watch?v=zKXz3pUkw9A&t=1467s

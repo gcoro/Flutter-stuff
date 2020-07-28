@@ -1,2 +1,2 @@
-# Flutter-CatApp
-sample flutter project, tutorial https://flutterbyexample.com
+# Flutter 
+sample flutter projects I used to learn Flutter, tutorial source: https://flutterbyexample.com
