@@ -71,8 +71,7 @@ class _CatDetailPageState extends State<CatDetailPage> {
             style: TextStyle(fontSize: 25.0),
           ),
           Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
             child: Text(widget.cat.description),
           ),
           rating
