@@ -42,6 +42,34 @@ class _CatFactsPageState extends State<CatFactsPage> {
     }
   }
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Hey'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Hello!'),
+                Text('Do you really love cats?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('YES I LOVE CATS'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget get getFactButton {
     return RaisedButton(
       onPressed: () => getCatFact(),
@@ -65,7 +93,7 @@ class _CatFactsPageState extends State<CatFactsPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.access_alarm),
-            onPressed: null,
+            onPressed: () => _showMyDialog(),
           )
         ],
       ),
