@@ -1,11 +1,12 @@
+import 'package:cat_app/models/cat_model.dart';
 import 'package:flutter/material.dart';
 
 import 'cat_card.dart';
-import 'models/cat_model.dart';
 
 class CatList extends StatelessWidget {
   // Builder methods rely on a set of data, such as a list.
   final List<Cat> cats;
+
   CatList(this.cats);
 
   // First, make your build method like normal.

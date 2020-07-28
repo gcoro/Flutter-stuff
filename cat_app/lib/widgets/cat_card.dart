@@ -1,6 +1,6 @@
+import 'package:cat_app/models/cat_model.dart';
+import 'package:cat_app/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
-
-import 'models/cat_model.dart';
 
 class CatCard extends StatefulWidget {
   final Cat cat;
@@ -75,11 +75,11 @@ class _CatCardState extends State<CatCard> {
     // The height and width are arbitrary numbers for styling.
     return Container(
         width: 320.0,
-        height: 115.0,
+        height: 150.0,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(100.0),
+          borderRadius: BorderRadius.circular(20.0),
           child: Card(
-            color: Colors.blue[100],
+            color: Colors.black87,
             // Wrap children in a Padding widget in order to give padding.
             child: Padding(
               // The class that controls padding is called 'EdgeInsets'
@@ -91,7 +91,7 @@ class _CatCardState extends State<CatCard> {
               // widgets out from top to bottom.
               child: Row(
                 children: <Widget>[
-                  catImage,
+                  CircleImage(renderUrl),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Column(
@@ -108,9 +108,9 @@ class _CatCardState extends State<CatCard> {
                             // Themes are set in the MaterialApp widget at the root of your app.
                             // They have default values -- which we're using because we didn't set our own.
                             // They're great for having consistent, app-wide styling that's easily changed.
-                            style: Theme.of(context).textTheme.body2),
+                            style: Theme.of(context).textTheme.headline6),
                         Text(widget.cat.location,
-                            style: Theme.of(context).textTheme.caption),
+                            style: Theme.of(context).textTheme.subtitle2),
                         Row(
                           children: <Widget>[
                             Icon(
@@ -134,7 +134,7 @@ class _CatCardState extends State<CatCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
-        height: 115.0,
+        height: 150.0,
         child: Stack(
           children: <Widget>[
             Positioned(
