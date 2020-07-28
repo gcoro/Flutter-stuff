@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     ..add(Cat('Ruby', 'Portland, OR, USA',
         'Ruby is a very good girl. Yes: Fetch, loungin\'. No: Dogs who get on furniture.'))
     ..add(Cat('Rex', 'Seattle, WA, USA', 'Best in Show 1999'))
-    ..add(Cat('Rod Stewart', 'Prague, CZ',
+    ..add(Cat('Rod', 'Prague, CZ',
         'Star good boy on international snooze team.'))
     ..add(Cat('Herbert', 'Dallas, TX, USA', 'A Very Good Boy'))
     ..add(Cat('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.'));

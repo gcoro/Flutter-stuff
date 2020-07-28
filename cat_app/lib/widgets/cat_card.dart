@@ -1,4 +1,5 @@
 import 'package:cat_app/models/cat_model.dart';
+import 'package:cat_app/screens/cat_detail_page.dart';
 import 'package:cat_app/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,25 @@ class _CatCardState extends State<CatCard> {
         renderUrl = widget.cat.imageUrl;
       });
     }
+  }
+
+
+ // This is the builder method that creates a new page.
+  showDetailPage() {
+    // Navigator.of(context) accesses the current app's navigator.
+    // Navigators can 'push' new routes onto the stack,
+    // as well as pop routes off the stack.
+    //
+    // This is the easiest way to build a new page on the fly
+    // and pass that page some state from the current page.
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        // builder methods always take context!
+        builder: (context) {
+          return CatDetailPage(widget.cat);
+        },
+      ),
+    );
   }
 
   Widget get catImage {
@@ -91,7 +111,7 @@ class _CatCardState extends State<CatCard> {
               // widgets out from top to bottom.
               child: Row(
                 children: <Widget>[
-                  CircleImage(renderUrl),
+                  CircleImage(renderUrl, 100),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Column(
@@ -131,17 +151,22 @@ class _CatCardState extends State<CatCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        height: 150.0,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              left: 0,
-              child: catCard,
-            ),
-          ],
+    // InkWell is a special Material widget that makes its children tappable
+    // and adds Material Design ink ripple when tapped.
+    return InkWell(
+      onTap: showDetailPage,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Container(
+          height: 150.0,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                left: 0,
+                child: catCard,
+              ),
+            ],
+          ),
         ),
       ),
     );

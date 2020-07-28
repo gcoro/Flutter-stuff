@@ -1,2 +1,2 @@
 # Flutter 
-sample flutter projects I used to learn Flutter, tutorial source: https://flutterbyexample.com
+Some stuff and sample projects I used to learn Flutter.
