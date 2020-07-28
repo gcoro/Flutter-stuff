@@ -1,6 +1,8 @@
 import 'package:cat_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
+import 'navigation/bottom_tab_navigation.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.dark
       ),
-      home: HomePage(title: 'Miao'),
+      home: BottomTabNavigation()// HomePage(title: 'Miao'),
     );
   }
 }
