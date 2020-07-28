@@ -15,7 +15,14 @@ class _CatDetailPageState extends State<CatDetailPage> {
   // Arbitrary size choice for styles
   final double avatarSize = 150.0;
   // This is the starting value of the slider.
-  double _sliderValue = 0.0;
+  double _sliderValue;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _sliderValue = widget.cat.rating.toDouble();
+  }
 
   void updateRating() {
     setState(() => widget.cat.rating = _sliderValue.toInt());
