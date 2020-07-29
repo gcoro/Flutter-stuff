@@ -35,8 +35,29 @@ class _HomePageState extends State<HomePage> {
 
     var storedCats = await storage.getCats();
 
+    print(storedCats);
+
+    if (storedCats != null && storedCats.length > 0) {
+      setState(() {
+        cats = cats + storedCats;
+        _loading = false;
+      });
+    } else {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
+
+  Future _deleteStoredCats() async {
     setState(() {
-      cats = cats + storedCats;
+      _loading = true;
+    });
+
+    await storage.removeCats();
+
+    setState(() {
+      cats = [];
       _loading = false;
     });
   }
@@ -72,6 +93,41 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> _showDeleteCatsDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you sure'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Delete all your cats?'),
+                Text('This will make them very sad'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('NO IM SORRY :('),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text('YES'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteStoredCats();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     /// Scaffold is the base for a page.
@@ -89,6 +145,10 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: _showAddCatForm,
+            ),
+            IconButton(
+              icon: Icon(Icons.delete_forever),
+              onPressed: _showDeleteCatsDialog,
             )
           ],
         ),
@@ -117,10 +177,18 @@ class _HomePageState extends State<HomePage> {
                   Colors.pink[50],
                 ])),
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              alignment: Alignment.center,
-              child: CatList(cats),
-            ),
+                width: MediaQuery.of(context).size.width,
+                alignment: Alignment.center,
+                child: cats.length > 0
+                    ? CatList(cats)
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32.0, vertical: 16.0),
+                        child: Text(
+                          "NO CATS :(\nYou may want to add some.\n\n “One cat just leads to another.” – Ernest Hemingway",
+                          style: TextStyle(fontSize: 25.0),
+                        ),
+                      )),
           ),
           isLoading: _loading,
           color: Colors.pink[200],
