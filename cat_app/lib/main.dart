@@ -1,4 +1,3 @@
-import 'package:cat_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'navigation/bottom_tab_navigation.dart';

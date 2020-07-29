@@ -1,4 +1,4 @@
-import 'package:cat_app/models/cat_model.dart';
+import 'package:cat_app/models/cat.dart';
 import 'package:flutter/material.dart';
 
 class AddCatPage extends StatefulWidget {

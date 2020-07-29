@@ -1,15 +1,27 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 import 'dart:io';
+part 'cat.g.dart';
 
+@JsonSerializable()
 class Cat {
-  final String name;
-  final String location;
-  final String description;
+  Cat(String name, String location, String description,
+      [String imageUrl, int rating]) {
+    this.name = name;
+    this.location = location;
+    this.description = description;
+    this.imageUrl = imageUrl ?? null;
+    this.rating = rating ?? 0;
+  }
+
+  String name;
+  String location;
+  String description;
   String imageUrl;
+  int rating;
 
-  int rating = 0;
-
-  Cat(this.name, this.location, this.description);
+  factory Cat.fromJson(Map<String, dynamic> json) => _$CatFromJson(json);
+  Map<String, dynamic> toJson() => _$CatToJson(this);
 
   Future getImageUrl() async {
     // Null check so our app isn't doing extra work.
@@ -27,7 +39,7 @@ class Cat {
       var response = await request.close();
       var responseBody = await response.transform(utf8.decoder).join();
       imageUrl = json.decode(responseBody)[0];
-      print('imageurl $imageUrl');
+      // print('imageurl $imageUrl');
     } catch (exception) {
       print(exception);
     }

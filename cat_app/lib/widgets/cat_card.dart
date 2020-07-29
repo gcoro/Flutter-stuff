@@ -1,4 +1,4 @@
-import 'package:cat_app/models/cat_model.dart';
+import 'package:cat_app/models/cat.dart';
 import 'package:cat_app/screens/cat_detail_page.dart';
 import 'package:cat_app/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +84,7 @@ class _CatCardState extends State<CatCard> {
     // A new container
     // The height and width are arbitrary numbers for styling.
     return Container(
-        width: 320.0,
+        // width: 320.0,
         height: 150.0,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),

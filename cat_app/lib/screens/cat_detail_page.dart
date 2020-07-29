@@ -1,4 +1,4 @@
-import 'package:cat_app/models/cat_model.dart';
+import 'package:cat_app/models/cat.dart';
 import 'package:cat_app/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
 
@@ -93,7 +93,10 @@ class _CatDetailPageState extends State<CatDetailPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-            child: Text(widget.cat.description),
+            child: Text(
+                widget.cat.description,
+              style: TextStyle(fontSize: 20.0),
+            ),
           ),
           rating
         ],

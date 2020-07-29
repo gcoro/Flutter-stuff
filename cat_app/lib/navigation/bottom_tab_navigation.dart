@@ -15,7 +15,7 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    HomePage(title: "Cat List"),
+    HomePage(title: "Rate cats"),
     CatFactsPage(title: "Cat Facts")
   ];
 
