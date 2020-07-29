@@ -19,7 +19,6 @@ class _AddCatPageState extends State<AddCatPage> {
   TextEditingController locationController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-
   // You'll need the context in order for the Navigator to work.
   void submitForm(BuildContext context) {
     // Validate returns true if the form is valid, or false
@@ -56,7 +55,7 @@ class _AddCatPageState extends State<AddCatPage> {
               vertical: 8.0,
               horizontal: 32.0,
             ),
-            child: Column(
+            child: ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),

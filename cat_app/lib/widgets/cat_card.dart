@@ -55,7 +55,7 @@ class _CatCardState extends State<CatCard> {
     // A new container
     // The height and width are arbitrary numbers for styling.
     return Container(
-        // width: 320.0,
+        width: MediaQuery.of(context).size.width - 32,
         height: 150.0,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),

@@ -30,7 +30,7 @@ class CatList extends StatelessWidget {
       // Must have an item count equal to the number of items!
       itemCount: cats.length,
       shrinkWrap: true,
-      padding: const EdgeInsets.all(10.0),
+      //  padding: const EdgeInsets.all(10.0),
       // A callback that will return a widget.
       itemBuilder: (context, int) {
         return Center(

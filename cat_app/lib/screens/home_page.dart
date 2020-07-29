@@ -4,6 +4,7 @@ import 'package:cat_app/services/api_service.dart';
 import 'package:cat_app/services/storage_service.dart';
 import 'package:cat_app/widgets/cat_list.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   final api = ApiService();
 
   List<Cat> cats = [];
+  bool _loading = false;
 
   @override
   initState() {
@@ -27,9 +29,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future _retrieveStoredCats() async {
+    setState(() {
+      _loading = true;
+    });
+
     var storedCats = await storage.getCats();
+
     setState(() {
       cats = cats + storedCats;
+      _loading = false;
     });
   }
 
@@ -70,44 +78,52 @@ class _HomePageState extends State<HomePage> {
     /// It gives an AppBar for the top,
     /// Space for the main body, bottom navigation, and more.
     return Scaffold(
-      /// App bar has a ton of functionality, but for now lets
-      /// just give it a color and a title.
-      appBar: AppBar(
-        /// Access this widgets properties with 'widget'
-        title: Text(widget.title),
-        backgroundColor: Colors.black87,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: _showAddCatForm,
-          )
-        ],
-      ),
 
-      /// Container is a convenience widget that lets us style it's
-      /// children. It doesn't take up any space itself, so it
-      /// can be used as a placeholder in your code.
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                // Add one stop for each color. Stops should increase from 0 to 1
-                stops: [
-              0.1,
-              0.5,
-              0.7,
-              0.9
-            ],
-                colors: [
-              // Colors are easy thanks to Flutter's Colors class.
-              Colors.pink[300],
-              Colors.pink[200],
-              Colors.pink[100],
-              Colors.pink[50],
-            ])),
-        child: CatList(cats),
-      ),
-    );
+        /// App bar has a ton of functionality, but for now lets
+        /// just give it a color and a title.
+        appBar: AppBar(
+          /// Access this widgets properties with 'widget'
+          title: Text(widget.title),
+          backgroundColor: Colors.black87,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: _showAddCatForm,
+            )
+          ],
+        ),
+
+        /// Container is a convenience widget that lets us style it's
+        /// children. It doesn't take up any space itself, so it
+        /// can be used as a placeholder in your code.
+        body: LoadingOverlay(
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    // Add one stop for each color. Stops should increase from 0 to 1
+                    stops: [
+                  0.1,
+                  0.5,
+                  0.7,
+                  0.9
+                ],
+                    colors: [
+                  // Colors are easy thanks to Flutter's Colors class.
+                  Colors.pink[300],
+                  Colors.pink[200],
+                  Colors.pink[100],
+                  Colors.pink[50],
+                ])),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              child: CatList(cats),
+            ),
+          ),
+          isLoading: _loading,
+          color: Colors.pink[200],
+        ));
   }
 }
