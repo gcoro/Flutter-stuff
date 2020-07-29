@@ -15,37 +15,9 @@ class CatCard extends StatefulWidget {
 class _CatCardState extends State<CatCard> {
   // Cat cat; --- this is against best practises because it duplicates the variable
 
-  // A class property that represents the URL flutter will render
-  // from the Cat class.
-  String renderUrl;
-
   // _CatCardState(this.cat); --- not needed anymore
 
-  // State classes run this method when the state is created.
-  // You shouldn't do async work in initState, so we'll defer it
-  // to another method.
-  void initState() {
-    super.initState();
-    renderCatPic();
-  }
-
-  // IRL, we'd want the Cat class itself to get the image
-  // but this is a simpler way to explain Flutter basics
-  void renderCatPic() async {
-    // this makes the service call
-    await widget.cat.getImageUrl();
-    // setState tells Flutter to rerender anything that's been changed.
-    // setState cannot be async, so we use a variable that can be overwritten
-    if (mounted) {
-      // Avoid calling `setState` if the widget is no longer in the widget tree.
-      setState(() {
-        renderUrl = widget.cat.imageUrl;
-      });
-    }
-  }
-
-
- // This is the builder method that creates a new page.
+  // This is the builder method that creates a new page.
   showDetailPage() async {
     // Navigator.of(context) accesses the current app's navigator.
     // Navigators can 'push' new routes onto the stack,
@@ -64,23 +36,22 @@ class _CatCardState extends State<CatCard> {
     );
 
     if (updatedCat != null) {
-         setState(() => widget.cat = updatedCat);
+      setState(() => widget.cat = updatedCat);
     }
   }
 
   Widget get catImage {
     // Wrap the dogAvatar widget in a Hero widget.
     return Hero(
-      // Give your hero a tag.
-      //
-      // Flutter looks for two widgets on two different pages,
-      // and if they have the same tag it animates between them.
-      tag: widget.cat,
-      child: CircleImage(renderUrl, 100)
-    );
-    }
+        // Give your hero a tag.
+        //
+        // Flutter looks for two widgets on two different pages,
+        // and if they have the same tag it animates between them.
+        tag: widget.cat,
+        child: CircleImage(widget.cat.imageUrl, 100));
+  }
 
-      Widget get catCard {
+  Widget get catCard {
     // A new container
     // The height and width are arbitrary numbers for styling.
     return Container(

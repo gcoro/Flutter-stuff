@@ -1,5 +1,6 @@
 import 'package:cat_app/models/cat.dart';
 import 'package:cat_app/screens/add_cat_page.dart';
+import 'package:cat_app/services/api_service.dart';
 import 'package:cat_app/services/storage_service.dart';
 import 'package:cat_app/widgets/cat_list.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final storage = StorageService();
+  final api = ApiService();
 
   List<Cat> cats = [];
 
@@ -50,13 +52,15 @@ class _HomePageState extends State<HomePage> {
 
     // A null check, to make sure that the user didn't abandon the form.
     if (newCat != null) {
-      // Add a newDog to our mock dog array.
+      // we get an image for the new cate!
+      var imageUrl = await api.getImageUrl();
+      newCat.imageUrl = imageUrl;
+
       setState(() {
-        cats.add(newCat);
-        storage.storeCats(cats);
-        // the following pushes the cat at the beginning
-        // cats.insert(0, newCat);
+        cats.insert(0, newCat);
       });
+
+      await storage.storeCats(cats);
     }
   }
 

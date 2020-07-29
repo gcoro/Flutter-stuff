@@ -17,12 +17,18 @@ class StorageService {
   getCats() async {
     final prefs = await SharedPreferences.getInstance();
     var stringifiedCats = prefs.getString('cats');
-    print(stringifiedCats);
+    // print(stringifiedCats);
     var cats = [];
     if (stringifiedCats != null) {
-      cats =(json.decode(stringifiedCats) as List).map((i) =>
-              Cat.fromJson(i)).toList();
+      cats = (json.decode(stringifiedCats) as List)
+          .map((i) => Cat.fromJson(i))
+          .toList();
     }
     return cats;
+  }
+
+  removeCats() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('cats');
   }
 }

@@ -12,8 +12,7 @@ class BottomTabNavigation extends StatefulWidget {
 
 class _BottomTabNavigationState extends State<BottomTabNavigation> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Rate cats"),
     CatFactsPage(title: "Cat Facts")
@@ -35,11 +34,11 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text('Rate'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            title: Text('Business'),
+            title: Text('Know'),
           )
         ],
         currentIndex: _selectedIndex,
