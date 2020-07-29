@@ -1,6 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'package:cat_app/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class CatFactsPage extends StatefulWidget {
@@ -14,32 +12,18 @@ class CatFactsPage extends StatefulWidget {
 
 class _CatFactsPageState extends State<CatFactsPage> {
 
+  final api = ApiService();
+  
   String fact;
 
-  Future getCatFact() async {
-    // This is how http calls are done in flutter:
-    HttpClient http = HttpClient();
-    try {
-      // Use darts Uri builder
-      var uri = Uri.https('catfact.ninja', '/fact');
-      var request = await http.getUrl(uri);
-      var response = await request.close();
-      if(response.statusCode == 200) {
-        var responseBody = await response.transform(utf8.decoder).join();
-        var res = json.decode(responseBody);
-        var catFact = res['fact'];
-        print('cat fact $catFact');
-
+  Future _getCatFact() async {
+    var catFact = await api.getCatFact();
+     
+     if(catFact != null) {
         setState(() {
           fact = catFact;
         });
-      } else {
-        print('error $response.statusCode');
-      }
-
-    } catch (exception) {
-      print(exception);
-    }
+     }
   }
 
   Future<void> _showMyDialog() async {
@@ -72,7 +56,7 @@ class _CatFactsPageState extends State<CatFactsPage> {
 
   Widget get getFactButton {
     return RaisedButton(
-      onPressed: () => getCatFact(),
+      onPressed: () => _getCatFact(),
       child: Text('Get fact'),
       color: Colors.pinkAccent,
     );
