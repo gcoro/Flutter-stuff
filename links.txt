@@ -12,3 +12,6 @@ https://gallery.flutter.dev/
 
 video sull'architettura di app flutter
 https://www.youtube.com/watch?v=zKXz3pUkw9A&t=1467s
+
+embeddare webview nativa (android) nb contiene alcune cose deprecate 
+https://60devs.com/how-to-add-native-code-to-flutter-app-using-platform-views-android.html 
