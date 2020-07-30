@@ -1,5 +1,6 @@
 import 'package:cat_app/screens/cat_facts_page.dart';
 import 'package:cat_app/screens/home_page.dart';
+import 'package:cat_app/screens/qr_scanning_page.dart';
 import 'package:cat_app/screens/webview_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,8 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
   // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Rate cats"),
-    CatFactsPage(title: "Cat Facts")
+    CatFactsPage(title: "Cat Facts"),
+    QrScanningPage(title: "Other magic things"),
   ];
 
   void _onItemTapped(int index) {
@@ -38,7 +40,11 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            title: Text('Know'),
+            title: Text('Learn'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.code),
+            title: Text('Etc'),
           )
         ],
         currentIndex: _selectedIndex,

@@ -193,6 +193,7 @@ class _HomePageState extends State<HomePage> {
                               ? ""
                               : "Add your first cat.\n\n “One cat just leads to another.” – Ernest Hemingway",
                           style: TextStyle(fontSize: 25.0),
+                          textAlign: TextAlign.center,
                         ),
                       )),
           ),
