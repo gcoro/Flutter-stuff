@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'cat.g.dart';
 
@@ -5,6 +6,7 @@ part 'cat.g.dart';
 class Cat {
   Cat(String name, String location, String description,
       [String imageUrl, int rating]) {
+    this.id = UniqueKey().toString();
     this.name = name;
     this.location = location;
     this.description = description;
@@ -12,6 +14,7 @@ class Cat {
     this.rating = rating ?? 0;
   }
 
+  String id;
   String name;
   String location;
   String description;

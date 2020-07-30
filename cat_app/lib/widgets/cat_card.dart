@@ -1,5 +1,6 @@
 import 'package:cat_app/models/cat.dart';
 import 'package:cat_app/screens/cat_detail_page.dart';
+import 'package:cat_app/services/storage_service.dart';
 import 'package:cat_app/widgets/circle_image.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class _CatCardState extends State<CatCard> {
   // Cat cat; --- this is against best practises because it duplicates the variable
 
   // _CatCardState(this.cat); --- not needed anymore
+  final storage = StorageService();
 
   // This is the builder method that creates a new page.
   showDetailPage() async {
@@ -37,6 +39,19 @@ class _CatCardState extends State<CatCard> {
 
     if (updatedCat != null) {
       setState(() => widget.cat = updatedCat);
+
+      // also save rating in storage
+      List<Cat> storedCats = await storage.getCats();
+
+      bool found = false;
+      for (var i = 0; i < storedCats.length && found == false; i++) {
+        if (storedCats[i].id == updatedCat.id) {
+          storedCats[i].rating = updatedCat.rating;
+          found = true;
+        }
+      }
+
+      await storage.storeCats(storedCats);
     }
   }
 

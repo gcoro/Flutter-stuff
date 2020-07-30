@@ -185,7 +185,9 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 32.0, vertical: 16.0),
                         child: Text(
-                          "NO CATS :(\nYou may want to add some.\n\n “One cat just leads to another.” – Ernest Hemingway",
+                          _loading
+                              ? ""
+                              : "Add your first cat.\n\n “One cat just leads to another.” – Ernest Hemingway",
                           style: TextStyle(fontSize: 25.0),
                         ),
                       )),
