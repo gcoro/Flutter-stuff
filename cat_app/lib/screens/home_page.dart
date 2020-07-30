@@ -1,8 +1,10 @@
 import 'package:cat_app/models/cat.dart';
 import 'package:cat_app/screens/add_cat_page.dart';
 import 'package:cat_app/services/api_service.dart';
+import 'package:cat_app/services/push_notifications.dart';
 import 'package:cat_app/services/storage_service.dart';
 import 'package:cat_app/widgets/cat_list.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
@@ -26,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   initState() {
     super.initState();
     _retrieveStoredCats();
+
+    PushNotificationsManager().init();
   }
 
   Future _retrieveStoredCats() async {

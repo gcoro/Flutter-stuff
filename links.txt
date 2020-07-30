@@ -15,3 +15,6 @@ https://www.youtube.com/watch?v=zKXz3pUkw9A&t=1467s
 
 embeddare webview nativa (android) nb contiene alcune cose deprecate 
 https://60devs.com/how-to-add-native-code-to-flutter-app-using-platform-views-android.html 
+
+integrare firebase push notifications 
+https://medium.com/@SebastianEngel/easy-push-notifications-with-flutter-and-firebase-cloud-messaging-d96084f5954f
