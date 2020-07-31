@@ -17,11 +17,15 @@ class QrScanningPage extends StatefulWidget {
   _QrScanningPageState createState() => _QrScanningPageState();
 }
 
-class _QrScanningPageState extends State<QrScanningPage> {
+class _QrScanningPageState extends State<QrScanningPage>
+    with SingleTickerProviderStateMixin {
   final api = ApiService();
 
   bool _loading = false;
   String _scanResult;
+
+  AnimationController _colorController;
+  Animation<Color> colorAnimation;
 
   _startScanning() async {
     setState(() {
@@ -54,6 +58,39 @@ class _QrScanningPageState extends State<QrScanningPage> {
   @override
   void initState() {
     super.initState();
+
+    _colorController = new AnimationController(
+      duration: const Duration(milliseconds: 3000),
+      vsync: this,
+    );
+    // A tween that begins at grey and ends at a green
+    // The chained 'animate' function is required
+    colorAnimation = new ColorTween(
+      begin: const Color.fromRGBO(224, 17, 95, 1),
+      end: const Color.fromRGBO(106, 90, 205, 0.5),
+    ).animate(_colorController)
+      // This is a another chained method for Animations.
+      // It will call the callback passed to it everytime the
+      // value of the tween changes. Call setState within it
+      // to repaint the widget with the new value
+      ..addListener(() {
+        setState(() {});
+      });
+
+    _colorController.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed) {
+        _colorController.repeat(reverse: true);
+      }
+    });
+    // Tell the animation to start
+    _colorController.forward();
+  }
+
+  // This is important for perf. When the widget is gone, remove the controller.
+  @override
+  dispose() {
+    _colorController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -87,7 +124,7 @@ class _QrScanningPageState extends State<QrScanningPage> {
                   end: Alignment.bottomLeft,
                   stops: [0.1, 0.5, 0.7, 0.9],
                   colors: [
-                    Colors.pink[300],
+                    colorAnimation.value,
                     Colors.pink[200],
                     Colors.pink[100],
                     Colors.pink[50],

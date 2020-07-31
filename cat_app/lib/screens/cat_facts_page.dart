@@ -82,12 +82,7 @@ class _CatFactsPageState extends State<CatFactsPage> {
           /// Access this widgets properties with 'widget'
           title: Text(widget.title),
           backgroundColor: Colors.black87,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.access_alarm),
-              onPressed: () => _showMyDialog(),
-            )
-          ],
+          actions: <Widget>[],
         ),
 
         /// Container is a convenience widget that lets us style it's
