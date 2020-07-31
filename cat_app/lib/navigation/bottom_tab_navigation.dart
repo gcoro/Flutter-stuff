@@ -17,6 +17,7 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Rate cats"),
     CatFactsPage(title: "Cat Facts"),
+    WebviewPage(title: "Watch"),
     QrScanningPage(title: "Other magic things"),
   ];
 
@@ -43,12 +44,16 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
             title: Text('Learn'),
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.tv),
+            title: Text('Web'),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.code),
             title: Text('Etc'),
           )
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.pink[100],
         onTap: _onItemTapped,
       ),
     );

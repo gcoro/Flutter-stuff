@@ -1,4 +1,7 @@
 import 'package:cat_app/services/api_service.dart';
+import 'package:cat_app/widgets/bouncing_animation.dart';
+import 'package:cat_app/widgets/pulsing_animation.dart';
+import 'package:cat_app/widgets/sliding_animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
@@ -76,7 +79,6 @@ class _QrScanningPageState extends State<QrScanningPage> {
           child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              padding: EdgeInsets.symmetric(vertical: 32.0),
               decoration: BoxDecoration(
                 // This would be a great opportunity to create a custom LinearGradient widget
                 // that could be shared throughout the app but I'll leave that to you.
@@ -96,6 +98,13 @@ class _QrScanningPageState extends State<QrScanningPage> {
                 children: <Widget>[
                   Align(
                       alignment: Alignment.center,
+                      child: Text(
+                        "\nPress button to scan QRCode\n",
+                        style: TextStyle(fontSize: 20.0),
+                        textAlign: TextAlign.center,
+                      )),
+                  Align(
+                      alignment: Alignment.center,
                       child: RaisedButton(
                         onPressed: () => _startScanning(),
                         child: Text('SCAN QR CODE'),
@@ -110,7 +119,7 @@ class _QrScanningPageState extends State<QrScanningPage> {
                           children: <Widget>[
                             _scanResult != null
                                 ? Text(
-                                    "THE QR CODE SAYS:\n\n",
+                                    "THE QR CODE SAYS:\n",
                                     style: TextStyle(fontSize: 20.0),
                                     textAlign: TextAlign.center,
                                   )
@@ -119,7 +128,7 @@ class _QrScanningPageState extends State<QrScanningPage> {
                                 ? _isURL(_scanResult)
                                     ? RichText(
                                         text: TextSpan(
-                                            text: _scanResult,
+                                            text: _scanResult + '\n',
                                             style: TextStyle(
                                                 fontSize: 20.0,
                                                 color: Colors.blue),
@@ -137,6 +146,16 @@ class _QrScanningPageState extends State<QrScanningPage> {
                           ],
                         )),
                   ),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "\nTap images to animate\n",
+                        style: TextStyle(fontSize: 20.0),
+                        textAlign: TextAlign.center,
+                      )),
+                  SlidingAnimation(),
+                  PulsingAnimation(),
+                  BouncingAnimation()
                 ],
               )),
           isLoading: _loading,
