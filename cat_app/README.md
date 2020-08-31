@@ -1,5 +1,12 @@
 # cat_app
 
-App with a list; API call to get images; Detail page
+Cat app things:
 
-Tutorial from: https://flutterbyexample.com
+- item list (add / edit / remove)
+- save data in device storage
+- api calls (get)
+- webview
+- qr code scanner
+- some simple animations
+
+The initial list tutorial was taken from: https://flutterbyexample.com
