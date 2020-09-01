@@ -6,16 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_favourites/models/cart.model.dart';
 
+import 'custom_drawer.dart';
+
 class MyCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawer(),
       appBar: AppBar(
         title: Text('Cart', style: Theme.of(context).textTheme.headline1),
         backgroundColor: Colors.white,
+        iconTheme: Theme.of(context).iconTheme
       ),
       body: Container(
-        color: Colors.yellow,
+        color: Theme.of(context).primaryColor,
         child: Column(
           children: [
             Expanded(
@@ -36,7 +40,7 @@ class MyCart extends StatelessWidget {
 class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var itemNameStyle = Theme.of(context).textTheme.headline6;
+    var itemNameStyle = Theme.of(context).textTheme.bodyText2;
     // This gets the current state of CartModel and also tells Flutter
     // to rebuild this widget when CartModel notifies listeners (in other words,
     // when it changes).

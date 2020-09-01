@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_favourites/screens/cart.dart';
-import 'package:provider_favourites/screens/login.dart';
-
+import 'package:provider_favourites/locator.dart';
+import 'package:provider_favourites/services/navigation_service.dart';
+import 'package:provider_favourites/router.dart' as router;
+import 'package:provider_favourites/constants/route_paths.dart' as routes;
 import 'common/theme.dart';
 import 'models/cart.model.dart';
 import 'models/catalog.dart';
-import 'screens/catalog.dart';
 
 void main() {
+  setupLocator();
   runApp(MyApp());
 }
 
@@ -35,13 +36,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Provider Demo',
+        navigatorKey: locator<NavigationService>().navigatorKey,
         theme: appTheme,
-        initialRoute: '/',
-        routes: {
-      '/': (context) => MyLogin(),
-      '/catalog': (context) => MyCatalog(),
-      '/cart': (context) => MyCart(),
-      },
+        onGenerateRoute: router.generateRoute,
+        initialRoute: routes.LoginRoute,
       ),
     );
   }

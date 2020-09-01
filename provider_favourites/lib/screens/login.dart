@@ -3,8 +3,13 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:provider_favourites/locator.dart';
+import 'package:provider_favourites/services/navigation_service.dart';
+import 'package:provider_favourites/constants/route_paths.dart' as routes;
 
 class MyLogin extends StatelessWidget {
+  final NavigationService _navigationService = locator<NavigationService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +38,10 @@ class MyLogin extends StatelessWidget {
                 height: 24,
               ),
               RaisedButton(
-                color: Colors.yellow,
+                color: Theme.of(context).primaryColor,
                 child: Text('ENTER'),
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/catalog');
+                  _navigationService.navigateTo(routes.CatalogueRoute);
                 },
               )
             ],

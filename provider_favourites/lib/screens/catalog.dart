@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_favourites/models/cart.model.dart';
 import 'package:provider_favourites/models/catalog.dart';
+import 'package:provider_favourites/screens/custom_drawer.dart';
 
 class MyCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawer(),
       body: CustomScrollView(
         slivers: [
           _MyAppBar(),
@@ -67,14 +69,9 @@ class _MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text('Catalog', style: Theme.of(context).textTheme.headline1),
+      title: Text('Catalogue', style: Theme.of(context).textTheme.headline1),
       floating: true,
-      actions: [
-        IconButton(
-          icon: Icon(Icons.favorite),
-          onPressed: () => Navigator.pushNamed(context, '/cart'),
-        ),
-      ],
+        iconTheme: Theme.of(context).iconTheme
     );
   }
 }
@@ -91,7 +88,7 @@ class _MyListItem extends StatelessWidget {
       // about any other change.
       (catalog) => catalog.getByPosition(index),
     );
-    var textTheme = Theme.of(context).textTheme.headline6;
+    var textTheme = Theme.of(context).textTheme.bodyText1;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
