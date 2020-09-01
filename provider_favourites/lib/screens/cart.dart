@@ -45,7 +45,7 @@ class _CartList extends StatelessWidget {
     return ListView.builder(
       itemCount: cart.items.length,
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
+        leading: Icon(Icons.favorite),
         title: Text(
           cart.items[index].name,
           style: itemNameStyle,
@@ -64,7 +64,7 @@ class _CartTotal extends StatelessWidget {
     return SizedBox(
       height: 200,
       child: Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Another way to listen to a model's change is to include
@@ -75,15 +75,15 @@ class _CartTotal extends StatelessWidget {
             // the rest of the widgets in this build method.
             Consumer<CartModel>(
                 builder: (context, cart, child) =>
-                    Text('\$${cart.totalPrice}', style: hugeStyle)),
+                    Text('Total favs is ${cart.items.length}', style: hugeStyle)),
             SizedBox(width: 24),
             FlatButton(
               onPressed: () {
                 Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text('Buying not supported yet.')));
+                    SnackBar(content: Text('This button does nothing')));
               },
               color: Colors.white,
-              child: Text('BUY'),
+              child: Text('OK'),
             ),
           ],
         ),

@@ -17,7 +17,7 @@ class MyCatalog extends StatelessWidget {
           SliverToBoxAdapter(child: SizedBox(height: 12)),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                    (context, index) => _MyListItem(index)),
+                (context, index) => _MyListItem(index)),
           ),
         ],
       ),
@@ -40,22 +40,25 @@ class _AddButton extends StatelessWidget {
     // This can lead to significant performance improvements.
     var isInCart = context.select<CartModel, bool>(
       // Here, we are only interested whether [item] is inside the cart.
-          (cart) => cart.items.contains(item),
+      (cart) => cart.items.contains(item),
     );
 
     return FlatButton(
       onPressed: isInCart
-          ? null
+          ? () {
+              var cart = context.read<CartModel>();
+              cart.remove(item);
+            }
           : () {
-        // If the item is not in cart, we let the user add it.
-        // We are using context.read() here because the callback
-        // is executed whenever the user taps the the button. In other
-        // words, it is executed outside the build method.
-        var cart = context.read<CartModel>();
-        cart.add(item);
-      },
+              // If the item is not in cart, we let the user add it.
+              // We are using context.read() here because the callback
+              // is executed whenever the user taps the the button. In other
+              // words, it is executed outside the build method.
+              var cart = context.read<CartModel>();
+              cart.add(item);
+            },
       splashColor: Theme.of(context).primaryColor,
-      child: isInCart ? Icon(Icons.check, semanticLabel: 'ADDED') : Text('ADD'),
+      child: isInCart ? Icon(Icons.favorite, semanticLabel: 'remove') : Icon(Icons.favorite_border, semanticLabel: 'add'),
     );
   }
 }
@@ -68,7 +71,7 @@ class _MyAppBar extends StatelessWidget {
       floating: true,
       actions: [
         IconButton(
-          icon: Icon(Icons.shopping_cart),
+          icon: Icon(Icons.favorite),
           onPressed: () => Navigator.pushNamed(context, '/cart'),
         ),
       ],
@@ -86,7 +89,7 @@ class _MyListItem extends StatelessWidget {
     var item = context.select<CatalogModel, Item>(
       // Here, we are only interested in the item at [index]. We don't care
       // about any other change.
-          (catalog) => catalog.getByPosition(index),
+      (catalog) => catalog.getByPosition(index),
     );
     var textTheme = Theme.of(context).textTheme.headline6;
 
