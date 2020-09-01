@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_favourites/locator.dart';
+import 'package:provider_favourites/models/user_model.dart';
 import 'package:provider_favourites/services/navigation_service.dart';
 import 'package:provider_favourites/router.dart' as router;
 import 'package:provider_favourites/constants/route_paths.dart' as routes;
 import 'common/theme.dart';
-import 'models/cart.model.dart';
-import 'models/catalog.dart';
+import 'models/cart_model.dart';
+import 'models/catalog_model.dart';
 
 void main() {
   setupLocator();
@@ -33,6 +34,10 @@ class MyApp extends StatelessWidget {
             return cart;
           },
         ),
+        ChangeNotifierProvider<User>(
+          create: (context) => User(),
+          child: MyApp(),
+        )
       ],
       child: MaterialApp(
         title: 'Provider Demo',

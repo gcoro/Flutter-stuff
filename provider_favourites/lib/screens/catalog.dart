@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_favourites/models/cart.model.dart';
-import 'package:provider_favourites/models/catalog.dart';
+import 'package:provider_favourites/models/cart_model.dart';
+import 'package:provider_favourites/models/catalog_model.dart';
 import 'package:provider_favourites/screens/custom_drawer.dart';
 
 class MyCatalog extends StatelessWidget {

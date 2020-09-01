@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_favourites/models/cart.model.dart';
+import 'package:provider_favourites/models/cart_model.dart';
 
 import 'custom_drawer.dart';
 
@@ -79,7 +79,7 @@ class _CartTotal extends StatelessWidget {
             // the rest of the widgets in this build method.
             Consumer<CartModel>(
                 builder: (context, cart, child) =>
-                    Text('Total favs is ${cart.items.length}', style: hugeStyle)),
+                    Text('Total is ${cart.items.length}', style: hugeStyle)),
             SizedBox(width: 24),
             FlatButton(
               onPressed: () {
