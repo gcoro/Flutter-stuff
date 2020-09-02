@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_favourites/models/user_model.dart';
+import 'package:provider_favourites/services/dialog_service.dart';
 import 'package:provider_favourites/services/navigation_service.dart';
 import 'package:provider_favourites/constants/route_paths.dart' as routes;
 
@@ -8,6 +9,19 @@ import '../locator.dart';
 
 class CustomDrawer extends StatelessWidget {
   final NavigationService _navigationService = locator<NavigationService>();
+  final DialogService _dialogService = locator<DialogService>();
+
+  Future showDialogLogout() async {
+    var dialogResult = await _dialogService.showDialog(
+        title: 'Warning',
+        description: 'Do you really want to logout?');
+
+    if (dialogResult.confirmed) {
+      _navigationService.navigateToReplace(routes.LoginRoute);
+    } else {
+      print('User cancelled the dialog');
+    }
+  }
 
   CustomDrawer({Key key}) : super(key: key);
 
@@ -64,10 +78,8 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: Text('Logout', style: Theme.of(context).textTheme.bodyText1),
             onTap: () {
-              // close the drawer
               Navigator.pop(context);
-              // Update the state of the app
-              _navigationService.navigateToReplace(routes.LoginRoute);
+              showDialogLogout();
             },
           ),
         ],

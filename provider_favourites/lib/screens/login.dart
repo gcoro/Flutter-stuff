@@ -6,15 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_favourites/locator.dart';
 import 'package:provider_favourites/models/user_model.dart';
+import 'package:provider_favourites/services/dialog_service.dart';
 import 'package:provider_favourites/services/navigation_service.dart';
 import 'package:provider_favourites/constants/route_paths.dart' as routes;
 
 class MyLogin extends StatelessWidget {
   final NavigationService _navigationService = locator<NavigationService>();
+  final DialogService _dialogService = locator<DialogService>();
 
   // One TextEditingController for each form input:
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+
+  Future showDialogInvalidCredentials() async {
+    var dialogResult = await _dialogService.showDialog(
+        title: 'Error',
+        description: 'Invalid credentials');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +61,8 @@ class MyLogin extends StatelessWidget {
                       Provider.of<User>(context, listen: false).setUser(usernameController.text, emailController.text);
                       _navigationService.navigateToReplace(
                           routes.CatalogueRoute);
+                    } else {
+                      showDialogInvalidCredentials();
                     }
                 },
               )
